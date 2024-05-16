@@ -7,11 +7,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class Differ {
 
     public static void generate() throws Exception {
-        String result = "";
+        var result = new StringBuilder("{\n");
 
         ObjectMapper mapper = new ObjectMapper();
 
@@ -31,8 +32,31 @@ public class Differ {
         File contentFirstFile = new File(String.valueOf(first));
         File contentLastFile = new File(String.valueOf(last));
 
-        Map<String, String> mapFromFirstFile = mapper.readValue(contentFirstFile, Map.class);
-        Map<String, String> mapFromLastFile = mapper.readValue(contentLastFile, Map.class);
+        Map<String, Object> mapFromFirstFile = mapper.readValue(contentFirstFile, Map.class);
+        Map<String, Object> mapFromLastFile = mapper.readValue(contentLastFile, Map.class);
+        Map<String, Object> sortFirstFile = new TreeMap<>(mapFromFirstFile);
+        Map<String, Object> sortLastFile = new TreeMap<>(mapFromLastFile);
 
+        sortFirstFile.forEach((key, value) -> {
+            if (!sortLastFile.containsKey(key)) {
+                result.append(" - " + key + ": " + value + "\n");
+            }
+            if (sortLastFile.containsKey(key) && sortLastFile.containsValue(value)) {
+                result.append("   " + key + ": " + value + "\n");
+            }
+            if (sortLastFile.containsKey(key) && !sortLastFile.containsValue(value)) {
+                result.append(" - " + key + ": " + value + "\n");
+                result.append(" + " + key + ": " + sortLastFile.get(key) + "\n");
+            }
+        });
+
+        sortLastFile.forEach((key, value) -> {
+            if (!sortFirstFile.containsKey(key)) {
+                result.append(" + " + key + ": " + sortLastFile.get(key) + "\n");
+            }
+        });
+        result.append("}");
+        result.toString();
+        System.out.println(result);
     }
 }
