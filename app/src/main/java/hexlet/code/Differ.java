@@ -15,9 +15,6 @@ public class Differ {
 
         ObjectMapper mapper = new ObjectMapper();
 
-        filepath1 = "/home/pavel/java-project-71/app/file1.json";
-        filepath2 = "/home/pavel/java-project-71/app/file2.json";
-
         Path first = Paths.get(filepath1).toAbsolutePath().normalize();
         Path last = Paths.get(filepath2).toAbsolutePath().normalize();
 

@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DifferTest {
-    String filepath1 = "/home/pavel/java-project-71/app/file1.json";
-    String filepath2 = "/home/pavel/java-project-71/app/file2.json";
+    String file1 = "/home/pavel/java-project-71/app/file1.json";
+    String file2 = "/home/pavel/java-project-71/app/file2.json";
 
     @Test
     public void testDiffer() throws Exception {
@@ -19,7 +19,7 @@ public class DifferTest {
                 + " + timeout: 20\n"
                 + " + verbose: true\n"
                 + "}";
-        var actual = Differ.generate(filepath1, filepath2, format);
+        var actual = Differ.generate(file1, file2, format);
         assertEquals(expected, actual);
     }
 }
