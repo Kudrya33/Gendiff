@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DifferTest {
+    String filepath1 = "/home/pavel/java-project-71/app/file1.json";
+    String filepath2 = "/home/pavel/java-project-71/app/file2.json";
 
     @Test
     public void testDiffer() throws Exception {
-        String filepath1 = "/home/pavel/java-project-71/app/src/test/resources/file1.json";
-        String filepath2 = "/home/pavel/java-project-71/app/src/test/resources/file2.json";
         String format = "stylish";
         String expected = "{\n"
                 + " - follow: false\n"
