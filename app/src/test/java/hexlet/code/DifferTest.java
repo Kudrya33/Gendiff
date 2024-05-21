@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DifferTest {
-    String file1 = "app/src/test/resources/file1.json";
-    String file2 = "app/src/test/resources/file2.json";
+    String file1 = "/src/test/resources/file1.json";
+    String file2 = "/src/test/resources/file2.json";
 
     @Test
     public void testDiffer() throws Exception {
