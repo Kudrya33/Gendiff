@@ -11,7 +11,6 @@ import java.util.TreeMap;
 public class Differ {
 
     public static String generate(String filepath1, String filepath2, String format) throws Exception {
-        var result = new StringBuilder("{\n");
 
         ObjectMapper mapper = new ObjectMapper();
 
@@ -32,6 +31,8 @@ public class Differ {
         Map<String, Object> mapFromLastFile = mapper.readValue(contentLastFile, Map.class);
         Map<String, Object> sortFirstFile = new TreeMap<>(mapFromFirstFile);
         Map<String, Object> sortLastFile = new TreeMap<>(mapFromLastFile);
+
+        var result = new StringBuilder("{\n");
 
         sortFirstFile.forEach((key, value) -> {
             if (!sortLastFile.containsKey(key)) {
