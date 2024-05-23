@@ -2,21 +2,20 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
-    id("java")
+    //id("java")
     application
     jacoco
     id("checkstyle")
     id("io.freefair.lombok") version "8.6"
     id("com.github.ben-manes.versions") version "0.50.0"
+    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 group = "io.hexlet"
 
 version = "1.0-SNAPSHOT"
 
-application {
-    mainClass = "hexlet.code.App"
-}
+application { mainClass.set("io.hexlet.Application") }
 
 repositories { mavenCentral() }
 
@@ -44,10 +43,10 @@ tasks.test {
 
 tasks.jacocoTestReport { reports { xml.required.set(true) } }
 
-tasks.getByName("run", JavaExec::class) {
+/*tasks.getByName("run", JavaExec::class) {
     standardInput = System.`in`
-}
+}*/
 
-checkstyle {
+/*checkstyle {
     toolVersion = "10.12.4"
-}
+}*/
