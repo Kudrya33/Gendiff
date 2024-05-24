@@ -31,6 +31,7 @@ public class Parser {
         Map<String, Object> sortFirstFile = new TreeMap<>(mapFromFirstFile);
         Map<String, Object> sortLastFile = new TreeMap<>(mapFromLastFile);
 
-        return Differ.generate(sortFirstFile, sortLastFile);
+        String output = Differ.generate(sortFirstFile, sortLastFile);
+        return output;
     }
 }
