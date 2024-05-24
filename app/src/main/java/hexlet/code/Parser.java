@@ -14,11 +14,8 @@ public class Parser {
 
         ObjectMapper mapper = new ObjectMapper();
 
-        String one = "file1.yml";
-        String two = "file2.yml";
-
-        Path first = Paths.get(one).toAbsolutePath().normalize();
-        Path last = Paths.get(two).toAbsolutePath().normalize();
+        Path first = Paths.get(filepath1).toAbsolutePath().normalize();
+        Path last = Paths.get(filepath2).toAbsolutePath().normalize();
 
         if (!Files.exists(first)) {
             throw new Exception("File '" + first + "' does not exist");
@@ -35,27 +32,6 @@ public class Parser {
         Map<String, Object> sortFirstFile = new TreeMap<>(mapFromFirstFile);
         Map<String, Object> sortLastFile = new TreeMap<>(mapFromLastFile);
 
-        var result = new StringBuilder("{\n");
-
-        sortFirstFile.forEach((key, value) -> {
-            if (!sortLastFile.containsKey(key)) {
-                result.append(" - " + key + ": " + value + "\n");
-            }
-            if (sortLastFile.containsKey(key) && sortLastFile.containsValue(value)) {
-                result.append("   " + key + ": " + value + "\n");
-            }
-            if (sortLastFile.containsKey(key) && !sortLastFile.containsValue(value)) {
-                result.append(" - " + key + ": " + value + "\n");
-                result.append(" + " + key + ": " + sortLastFile.get(key) + "\n");
-            }
-        });
-
-        sortLastFile.forEach((key, value) -> {
-            if (!sortFirstFile.containsKey(key)) {
-                result.append(" + " + key + ": " + sortLastFile.get(key) + "\n");
-            }
-        });
-        result.append("}");
-        return result.toString();
+        return Differ.generate(sortFirstFile, sortLastFile);
     }
 }
