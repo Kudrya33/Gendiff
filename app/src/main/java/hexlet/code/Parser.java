@@ -14,8 +14,8 @@ public class Parser {
 
         ObjectMapper mapper = new ObjectMapper();
 
-        String one = "/home/pavel/java-project-71/app/file1.yml";
-        String two = "/home/pavel/java-project-71/app/file2.yml";
+        String one = "file1.yml";
+        String two = "file2.yml";
 
         Path first = Paths.get(one).toAbsolutePath().normalize();
         Path last = Paths.get(two).toAbsolutePath().normalize();
