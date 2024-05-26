@@ -2,36 +2,38 @@ package hexlet.code;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
-import java.nio.file.Files;
+import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class Parser {
-    public static String pars(String filepath1, String filepath2, String format) throws Exception {
-
+    public static List<Map<String, Object>> pars(Path firstFile, Path lastFile) {
         ObjectMapper mapper = new ObjectMapper();
 
-        Path first = Paths.get(filepath1).toAbsolutePath().normalize();
-        Path last = Paths.get(filepath2).toAbsolutePath().normalize();
+        File contentFirstFile = new File(String.valueOf(firstFile));
+        File contentLastFile = new File(String.valueOf(lastFile));
 
-        if (!Files.exists(first)) {
-            throw new Exception("File '" + first + "' does not exist");
+        Map<String, Object> mapFromFirstFile = null;
+        try {
+            mapFromFirstFile = mapper.readValue(contentFirstFile, Map.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        if (!Files.exists(last)) {
-            throw new Exception("File '" + last + "' does not exist");
+        Map<String, Object> mapFromLastFile = null;
+        try {
+            mapFromLastFile = mapper.readValue(contentLastFile, Map.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-
-        File contentFirstFile = new File(String.valueOf(first));
-        File contentLastFile = new File(String.valueOf(last));
-
-        Map<String, Object> mapFromFirstFile = mapper.readValue(contentFirstFile, Map.class);
-        Map<String, Object> mapFromLastFile = mapper.readValue(contentLastFile, Map.class);
         Map<String, Object> sortFirstFile = new TreeMap<>(mapFromFirstFile);
         Map<String, Object> sortLastFile = new TreeMap<>(mapFromLastFile);
 
-        String output = Differ.generate(sortFirstFile, sortLastFile);
-        return output;
+        var parserMaps = new ArrayList<Map<String, Object>>();
+        parserMaps.add(sortFirstFile);
+        parserMaps.add(sortLastFile);
+        return parserMaps;
     }
 }

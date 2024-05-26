@@ -20,7 +20,7 @@ public class DifferTest {
                 + " + timeout: 20\n"
                 + " + verbose: true\n"
                 + "}";
-        var actual = Parser.pars(file1, file2, format);
+        var actual = Differ.generate(file1, file2, format);
         assertEquals(expected, actual);
     }
     @Test
@@ -34,7 +34,7 @@ public class DifferTest {
                 + " + timeout: 20\n"
                 + " + verbose: true\n"
                 + "}";
-        var actual = Parser.pars(file3, file4, format);
+        var actual = Differ.generate(file3, file4, format);
         assertEquals(expected, actual);
     }
 }
