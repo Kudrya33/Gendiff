@@ -26,20 +26,20 @@ public class Differ {
 
         dateOne.forEach((key, value) -> {
             if (!dateTwo.containsKey(key)) {
-                stringBuild.append(" - " + key + ": " + value + "\n");
+                stringBuild.append("  - " + key + ": " + value + "\n");
             }
             if (dateTwo.containsKey(key) && dateTwo.containsValue(value)) {
-                stringBuild.append("   " + key + ": " + value + "\n");
+                stringBuild.append("    " + key + ": " + value + "\n");
             }
             if (dateTwo.containsKey(key) && !dateTwo.containsValue(value)) {
-                stringBuild.append(" - " + key + ": " + value + "\n");
-                stringBuild.append(" + " + key + ": " + dateTwo.get(key) + "\n");
+                stringBuild.append("  - " + key + ": " + value + "\n");
+                stringBuild.append("  + " + key + ": " + dateTwo.get(key) + "\n");
             }
         });
 
         dateTwo.forEach((key, value) -> {
             if (!dateOne.containsKey(key)) {
-                stringBuild.append(" + " + key + ": " + dateTwo.get(key) + "\n");
+                stringBuild.append("  + " + key + ": " + dateTwo.get(key) + "\n");
             }
         });
         stringBuild.append("}");
