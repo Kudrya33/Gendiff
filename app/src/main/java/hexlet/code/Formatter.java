@@ -5,7 +5,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class Formatter {
-    public static String format(Map<String, List<String>> allDate, Map<String, Object> dateOne, Map<String, Object> dateTwo) {
+    public static String format(Map<String, List<String>> allDate, Map<String,
+            Object> dateOne, Map<String, Object> dateTwo) {
 
         Map<String, List<String>> sortAllDate = new TreeMap<>(allDate);
 
