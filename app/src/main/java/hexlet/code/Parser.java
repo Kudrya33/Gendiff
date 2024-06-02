@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class Parser {
     public static List<Map<String, Object>> pars(Path firstFile, Path lastFile) {
@@ -28,12 +27,10 @@ public class Parser {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Map<String, Object> sortFirstFile = new TreeMap<>(mapFromFirstFile);
-        Map<String, Object> sortLastFile = new TreeMap<>(mapFromLastFile);
 
         var parserMaps = new ArrayList<Map<String, Object>>();
-        parserMaps.add(sortFirstFile);
-        parserMaps.add(sortLastFile);
+        parserMaps.add(mapFromFirstFile);
+        parserMaps.add(mapFromLastFile);
         return parserMaps;
     }
 }

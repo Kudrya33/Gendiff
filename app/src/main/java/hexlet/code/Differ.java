@@ -3,6 +3,9 @@ package hexlet.code;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Differ {
@@ -21,29 +24,54 @@ public class Differ {
         var parserlist = Parser.pars(firstFile, lastFile);
         Map<String, Object> dateOne = parserlist.get(0);
         Map<String, Object> dateTwo = parserlist.get(1);
+        Map<String, List<String>> allDate = new HashMap<>();
 
-        var stringBuild = new StringBuilder("{\n");
+        dateOne.forEach((key, value) -> {
+            if (value == null) {
+                value = "null";
+                dateOne.put(key, value);
+            }
+        });
+
+        dateTwo.forEach((key, value) -> {
+            if (value == null) {
+                value = "null";
+                dateTwo.put(key, value);
+            }
+        });
 
         dateOne.forEach((key, value) -> {
             if (!dateTwo.containsKey(key)) {
-                stringBuild.append("  - " + key + ": " + value + "\n");
+                List<String> values = new ArrayList<>();
+                String valueToString = value.toString();
+                values.add(valueToString);
+                allDate.put(key, values);
             }
-            if (dateTwo.containsKey(key) && dateTwo.containsValue(value)) {
-                stringBuild.append("    " + key + ": " + value + "\n");
+            if (dateTwo.containsKey(key) && dateTwo.get(key).equals(value)) {
+                List<String> values = new ArrayList<>();
+                String valueToString = value.toString();
+                values.add(valueToString);
+                allDate.put(key, values);
             }
-            if (dateTwo.containsKey(key) && !dateTwo.containsValue(value)) {
-                stringBuild.append("  - " + key + ": " + value + "\n");
-                stringBuild.append("  + " + key + ": " + dateTwo.get(key) + "\n");
+            if (dateTwo.containsKey(key) && !dateTwo.get(key).equals(value)) {
+                List<String> values = new ArrayList<>();
+                String valueDateOne = value.toString();
+                String valueDateTwo = dateTwo.get(key).toString();
+                values.add(valueDateOne);
+                values.add(valueDateTwo);
+                allDate.put(key, values);
             }
         });
 
         dateTwo.forEach((key, value) -> {
             if (!dateOne.containsKey(key)) {
-                stringBuild.append("  + " + key + ": " + dateTwo.get(key) + "\n");
+                List<String> values = new ArrayList<>();
+                String valueToString = value.toString();
+                values.add(valueToString);
+                allDate.put(key, values);
             }
         });
-        stringBuild.append("}");
-        String result = stringBuild.toString();
-        return result;
+
+        return Formatter.format(allDate, dateOne, dateTwo);
     }
 }
