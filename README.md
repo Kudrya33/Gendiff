@@ -5,4 +5,5 @@
 [![Java CI](https://github.com/Kudrya33/java-project-71/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/Kudrya33/java-project-71/actions/workflows/main.yml)
 [![asciicast](https://asciinema.org/a/659737.svg)](https://asciinema.org/a/659737)
 [![asciicast](https://asciinema.org/a/661012.svg)](https://asciinema.org/a/661012)
+[![asciicast](https://asciinema.org/a/662174.svg)](https://asciinema.org/a/662174)
 
