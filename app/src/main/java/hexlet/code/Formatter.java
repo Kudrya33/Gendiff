@@ -1,33 +1,27 @@
 package hexlet.code;
 
+import hexlet.code.formatters.FormatPlain;
+import hexlet.code.formatters.FormatStylish;
+
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class Formatter {
-    public static String format(Map<String, List<String>> allDate, Map<String,
-            Object> dateOne, Map<String, Object> dateTwo) {
+    public static String formatter(Map<String, List<String>> allDate, Map<String,
+            Object> dateOne, Map<String, Object> dateTwo, String format) {
+        String result = "";
 
-        Map<String, List<String>> sortAllDate = new TreeMap<>(allDate);
-
-        var stringBuild = new StringBuilder("{\n");
-
-        sortAllDate.forEach((key, value) -> {
-            if (sortAllDate.get(key).size() > 1) {
-                stringBuild.append("  - " + key + ": " + value.get(0) + "\n");
-                stringBuild.append("  + " + key + ": " + value.get(1) + "\n");
-            }
-            if (sortAllDate.get(key).size() < 2 && dateOne.containsKey(key) && !dateTwo.containsKey(key)) {
-                stringBuild.append("  - " + key + ": " + value.get(0) + "\n");
-            }
-            if (sortAllDate.get(key).size() < 2 && dateOne.containsKey(key) && dateTwo.containsKey(key)) {
-                stringBuild.append("    " + key + ": " + value.get(0) + "\n");
-            }
-            if (sortAllDate.get(key).size() < 2 && !dateOne.containsKey(key) && dateTwo.containsKey(key)) {
-                stringBuild.append("  + " + key + ": " + value.get(0) + "\n");
-            }
-        });
-        stringBuild.append("}");
-        return stringBuild.toString();
+        switch (format) {
+            case "stylish":
+                result = FormatStylish.stylish(allDate, dateOne, dateTwo);
+                break;
+            case "plain":
+                result = FormatPlain.plain(allDate, dateOne, dateTwo);
+                break;
+            default:
+                result = FormatStylish.stylish(allDate, dateOne, dateTwo);
+        }
+        return result;
     }
 }

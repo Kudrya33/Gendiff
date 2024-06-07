@@ -72,6 +72,6 @@ public class Differ {
             }
         });
 
-        return Formatter.format(allDate, dateOne, dateTwo);
+        return Formatter.formatter(allDate, dateOne, dateTwo, format);
     }
 }
