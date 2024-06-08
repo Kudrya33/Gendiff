@@ -5,10 +5,9 @@ import hexlet.code.formatters.FormatStylish;
 
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class Formatter {
-    public static String formatter(Map<String, List<String>> allDate, Map<String,
+    public static String formatter(Map<String, List<Object>> allDate, Map<String,
             Object> dateOne, Map<String, Object> dateTwo, String format) {
         String result = "";
 

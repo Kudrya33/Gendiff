@@ -24,7 +24,7 @@ public class Differ {
         var parserlist = Parser.pars(firstFile, lastFile);
         Map<String, Object> dateOne = parserlist.get(0);
         Map<String, Object> dateTwo = parserlist.get(1);
-        Map<String, List<String>> allDate = new HashMap<>();
+        Map<String, List<Object>> allDate = new HashMap<>();
 
         dateOne.forEach((key, value) -> {
             if (value == null) {
@@ -42,22 +42,19 @@ public class Differ {
 
         dateOne.forEach((key, value) -> {
             if (!dateTwo.containsKey(key)) {
-                List<String> values = new ArrayList<>();
-                String valueToString = value.toString();
-                values.add(valueToString);
+                List<Object> values = new ArrayList<>();
+                values.add(value);
                 allDate.put(key, values);
             }
             if (dateTwo.containsKey(key) && dateTwo.get(key).equals(value)) {
-                List<String> values = new ArrayList<>();
-                String valueToString = value.toString();
-                values.add(valueToString);
+                List<Object> values = new ArrayList<>();
+                values.add(value);
                 allDate.put(key, values);
             }
             if (dateTwo.containsKey(key) && !dateTwo.get(key).equals(value)) {
-                List<String> values = new ArrayList<>();
-                String valueDateOne = value.toString();
-                String valueDateTwo = dateTwo.get(key).toString();
-                values.add(valueDateOne);
+                List<Object> values = new ArrayList<>();
+                Object valueDateTwo = dateTwo.get(key);
+                values.add(value);
                 values.add(valueDateTwo);
                 allDate.put(key, values);
             }
@@ -65,13 +62,11 @@ public class Differ {
 
         dateTwo.forEach((key, value) -> {
             if (!dateOne.containsKey(key)) {
-                List<String> values = new ArrayList<>();
-                String valueToString = value.toString();
-                values.add(valueToString);
+                List<Object> values = new ArrayList<>();
+                values.add(value);
                 allDate.put(key, values);
             }
         });
-
         return Formatter.formatter(allDate, dateOne, dateTwo, format);
     }
 }

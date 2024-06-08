@@ -10,7 +10,7 @@ public class DifferTest {
     String file4 = "file2.yml";
 
     @Test
-    public void testDiffer() throws Exception {
+    public void testStylishJson() throws Exception {
         String format = "stylish";
         String expected = "{\n"
                 + "  - follow: false\n"
@@ -24,7 +24,7 @@ public class DifferTest {
         assertEquals(expected, actual);
     }
     @Test
-    public void testParser() throws Exception {
+    public void testStylishYml() throws Exception {
         String format = "stylish";
         String expected = "{\n"
                 + "    chars1: [a, b, c]\n"
@@ -51,6 +51,35 @@ public class DifferTest {
                 + "  - setting3: true\n"
                 + "  + setting3: none\n"
                 + "}";
+        var actual = Differ.generate(file3, file4, format);
+        assertEquals(expected, actual);
+    }
+    @Test
+    public void testPlainJson() throws Exception {
+        String format = "plain";
+        String expected = "Property 'follow' was removed\n"
+                + "Property 'proxy' was removed\n"
+                + "Property 'timeout' was updated. From 50 to 20\n"
+                + "Property 'verbose' was added with value: true";
+        var actual = Differ.generate(file1, file2, format);
+        assertEquals(expected, actual);
+    }
+    @Test
+    public void testPlainYml() throws Exception {
+        String format = "plain";
+        String expected = "Property 'chars2' was updated. From [complex value] to false\n"
+                + "Property 'checked' was updated. From false to true\n"
+                + "Property 'default' was updated. From null to [complex value]\n"
+                + "Property 'id' was updated. From 45 to null\n"
+                + "Property 'key1' was removed\n"
+                + "Property 'key2' was added with value: 'value2'\n"
+                + "Property 'numbers2' was updated. From [complex value] to [complex value]\n"
+                + "Property 'numbers3' was removed\n"
+                + "Property 'numbers4' was added with value: [complex value]\n"
+                + "Property 'obj1' was added with value: [complex value]\n"
+                + "Property 'setting1' was updated. From 'Some value' to 'Another value'\n"
+                + "Property 'setting2' was updated. From 200 to 300\n"
+                + "Property 'setting3' was updated. From true to 'none'";
         var actual = Differ.generate(file3, file4, format);
         assertEquals(expected, actual);
     }
