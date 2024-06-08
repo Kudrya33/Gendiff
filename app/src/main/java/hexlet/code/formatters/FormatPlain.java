@@ -24,7 +24,8 @@ public class FormatPlain {
                 if (value.get(1) instanceof  ArrayList<?> || value.get(1) instanceof Map) {
                     value.set(1, "[complex value]");
                 }
-                stringBuild.append("Property " + "'" + key + "' " + "was updated. From " + value.get(0).toString() + " to " + value.get(1).toString() + "\n");
+                stringBuild.append("Property " + "'" + key + "' " + "was updated. From "
+                        + value.get(0).toString() + " to " + value.get(1).toString() + "\n");
             }
             if (sortAllDate.get(key).size() < 2 && dateOne.containsKey(key) && !dateTwo.containsKey(key)) {
                 if (value.get(0) instanceof String && !value.get(0).equals("null")) {
