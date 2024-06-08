@@ -1,6 +1,9 @@
 package hexlet.code.formatters;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class FormatPlain {
     public static String plain(Map<String, List<Object>> allDate, Map<String,
@@ -43,7 +46,8 @@ public class FormatPlain {
                 if (value.get(0) instanceof ArrayList<?> || value.get(0) instanceof Map) {
                     value.set(0, "[complex value]");
                 }
-                stringBuild.append("Property " + "'" + key + "' " + "was added with value: " + value.get(0).toString() + "\n");
+                stringBuild.append("Property " + "'" + key + "' " + "was added with value: "
+                        + value.get(0).toString() + "\n");
             }
         });
         return stringBuild.toString().trim();
