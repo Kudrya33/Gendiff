@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import hexlet.code.formatters.FormatJson;
 import hexlet.code.formatters.FormatPlain;
 import hexlet.code.formatters.FormatStylish;
 
@@ -18,6 +19,8 @@ public class Formatter {
             case "plain":
                 result = FormatPlain.plain(allDate, dateOne, dateTwo);
                 break;
+            case "json":
+                result = FormatJson.json(allDate);
             default:
                 result = FormatStylish.stylish(allDate, dateOne, dateTwo);
         }

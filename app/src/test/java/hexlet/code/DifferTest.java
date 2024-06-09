@@ -20,7 +20,7 @@ public class DifferTest {
                 + "  + timeout: 20\n"
                 + "  + verbose: true\n"
                 + "}";
-        var actual = Differ.generate(file1, file2, format);
+        var actual = Differ.generate(file3, file4, format);
         assertEquals(expected, actual);
     }
     @Test
@@ -51,7 +51,7 @@ public class DifferTest {
                 + "  - setting3: true\n"
                 + "  + setting3: none\n"
                 + "}";
-        var actual = Differ.generate(file3, file4, format);
+        var actual = Differ.generate(file1, file2, format);
         assertEquals(expected, actual);
     }
     @Test
@@ -61,7 +61,7 @@ public class DifferTest {
                 + "Property 'proxy' was removed\n"
                 + "Property 'timeout' was updated. From 50 to 20\n"
                 + "Property 'verbose' was added with value: true";
-        var actual = Differ.generate(file1, file2, format);
+        var actual = Differ.generate(file3, file4, format);
         assertEquals(expected, actual);
     }
     @Test
@@ -80,7 +80,7 @@ public class DifferTest {
                 + "Property 'setting1' was updated. From 'Some value' to 'Another value'\n"
                 + "Property 'setting2' was updated. From 200 to 300\n"
                 + "Property 'setting3' was updated. From true to 'none'";
-        var actual = Differ.generate(file3, file4, format);
+        var actual = Differ.generate(file1, file2, format);
         assertEquals(expected, actual);
     }
 }
