@@ -21,6 +21,7 @@ public class Formatter {
                 break;
             case "json":
                 result = FormatJson.json(allDate);
+                break;
             default:
                 result = FormatStylish.stylish(allDate, dateOne, dateTwo);
         }

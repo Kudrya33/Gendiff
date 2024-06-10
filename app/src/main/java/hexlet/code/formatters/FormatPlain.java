@@ -1,6 +1,5 @@
 package hexlet.code.formatters;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -21,10 +20,10 @@ public class FormatPlain {
                 if (value.get(1) instanceof String && !value.get(1).equals("null")) {
                     value.set(1, "'" + value.get(1) + "'");
                 }
-                if (value.get(0) instanceof ArrayList<?> || value.get(0) instanceof Map) {
+                if (value.get(0) instanceof List<?> || value.get(0) instanceof Map) {
                     value.set(0, "[complex value]");
                 }
-                if (value.get(1) instanceof  ArrayList<?> || value.get(1) instanceof Map) {
+                if (value.get(1) instanceof  List<?> || value.get(1) instanceof Map) {
                     value.set(1, "[complex value]");
                 }
                 stringBuild.append("Property " + "'" + key + "' " + "was updated. From "
@@ -34,7 +33,7 @@ public class FormatPlain {
                 if (value.get(0) instanceof String && !value.get(0).equals("null")) {
                     value.set(0, "'" + value.get(0) + "'");
                 }
-                if (value.get(0) instanceof ArrayList<?> || value.get(0) instanceof Map) {
+                if (value.get(0) instanceof List<?> || value.get(0) instanceof Map) {
                     value.set(0, "[complex value]");
                 }
                 stringBuild.append("Property " + "'" + key + "' " + "was removed\n");
@@ -43,7 +42,7 @@ public class FormatPlain {
                 if (value.get(0) instanceof String && !value.get(0).equals("null")) {
                     value.set(0, "'" + value.get(0) + "'");
                 }
-                if (value.get(0) instanceof ArrayList<?> || value.get(0) instanceof Map) {
+                if (value.get(0) instanceof List<?> || value.get(0) instanceof Map) {
                     value.set(0, "[complex value]");
                 }
                 stringBuild.append("Property " + "'" + key + "' " + "was added with value: "

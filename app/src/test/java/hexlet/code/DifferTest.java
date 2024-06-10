@@ -83,4 +83,25 @@ public class DifferTest {
         var actual = Differ.generate(file1, file2, format);
         assertEquals(expected, actual);
     }
+    @Test
+    public void testJsonJson() throws Exception {
+        String format = "json";
+        String expected = "{\"chars1\":[[\"a\",\"b\",\"c\"]],\"chars2\":[[\"d\",\"e\",\"f\"],false],"
+                + "\"checked\":[false,true],\"default\":[\"null\",[\"value1\",\"value2\"]],"
+                + "\"id\":[45,\"null\"],\"key1\":[\"value1\"],\"key2\":[\"value2\"],\"numbers1\":[[1,2,3,4]],"
+                + "\"numbers2\":[[2,3,4,5],[22,33,44,55]],\"numbers3\":[[3,4,5]],\"numbers4\":[[4,5,6]],"
+                + "\"obj1\":[{\"nestedKey\":\"value\",\"isNested\":true}],"
+                + "\"setting1\":[\"Some value\",\"Another value\"],"
+                + "\"setting2\":[200,300],\"setting3\":[true,\"none\"]}";
+        var actual = Differ.generate(file1, file2, format);
+        assertEquals(expected, actual);
+    }
+    @Test
+    public void testJsonYml() throws Exception {
+        String format = "json";
+        String expected = "{\"follow\":[false],\"host\":[\"hexlet.io\"],\"proxy\":[\"123.234.53.22\"],"
+                + "\"timeout\":[50,20],\"verbose\":[true]}";
+        var actual = Differ.generate(file3, file4, format);
+        assertEquals(expected, actual);
+    }
 }
