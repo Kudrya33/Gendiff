@@ -2,14 +2,13 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
-    //id("java")
     application
     jacoco
     id("checkstyle")
     id("io.freefair.lombok") version "8.6"
 }
 
-group = "io.hexlet"
+group = "hexlet.code"
 
 version = "1.0-SNAPSHOT"
 
@@ -40,6 +39,7 @@ tasks.test {
 }
 
 tasks.jacocoTestReport { reports { xml.required.set(true) } }
+<<<<<<< HEAD
 
 /*tasks.getByName("run", JavaExec::class) {
     standardInput = System.`in`
@@ -48,3 +48,5 @@ tasks.jacocoTestReport { reports { xml.required.set(true) } }
 /*checkstyle {
     toolVersion = "10.12.4"
 }*/
+=======
+>>>>>>> 742d690 (update)
