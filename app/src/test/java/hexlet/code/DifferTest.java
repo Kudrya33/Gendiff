@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DifferTest {
-    String file1 = "file1.json";
-    String file2 = "file2.json";
-    String file3 = "file1.yml";
-    String file4 = "file2.yml";
+    String file1 = "/home/pavel/java-project-71/app/src/test/resources/fixtures/file1.json";
+    String file2 = "/home/pavel/java-project-71/app/src/test/resources/fixtures/file2.json";
+    String file3 = "/home/pavel/java-project-71/app/src/test/resources/fixtures/file1.yml";
+    String file4 = "/home/pavel/java-project-71/app/src/test/resources/fixtures/file2.yml";
 
     @Test
     public void testStylishJson() throws Exception {
