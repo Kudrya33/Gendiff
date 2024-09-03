@@ -1,9 +1,15 @@
 package hexlet.code;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class AllDiffer {
-    public static List<Map<String, Object>> dif (Map<String, Object> map1, Map<String, Object> map2) {
+    public static List<Map<String, Object>> dif(Map<String, Object> map1, Map<String, Object> map2) {
         List<Map<String, Object>> result = new ArrayList<>();
 
         Set<String> keysSet = new TreeSet<>(map1.keySet());
@@ -33,5 +39,4 @@ public class AllDiffer {
         }
         return result;
     }
-
 }
