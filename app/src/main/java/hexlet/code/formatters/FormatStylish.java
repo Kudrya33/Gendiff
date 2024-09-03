@@ -2,32 +2,44 @@ package hexlet.code.formatters;
 
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class FormatStylish {
-    public static String stylish(Map<String, List<Object>> allDate, Map<String,
-            Object> dateOne, Map<String, Object> dateTwo) {
+    public static String stylish(List<Map<String, Object>> allDate) {
+        StringBuilder result = new StringBuilder("{\n");
 
-        Map<String, List<Object>> sortAllDate = new TreeMap<>(allDate);
-
-        var stringBuild = new StringBuilder("{\n");
-
-        sortAllDate.forEach((key, value) -> {
-            if (sortAllDate.get(key).size() > 1) {
-                stringBuild.append("  - " + key + ": " + value.get(0).toString() + "\n");
-                stringBuild.append("  + " + key + ": " + value.get(1).toString() + "\n");
+        for(Map<String, Object> diffs : allDate) {
+            switch (diffs.get("status").toString()) {
+                case "removed" -> result.append("  - ")
+                        .append(diffs.get("key"))
+                        .append(": ")
+                        .append(diffs.get("oldValue"))
+                        .append("\n");
+                case "added" -> result.append("  + ")
+                        .append(diffs.get("key"))
+                        .append(": ")
+                        .append(diffs.get("newValue"))
+                        .append("\n");
+                case "unchanged" -> result.append("    ")
+                        .append(diffs.get("key"))
+                        .append(": ")
+                        .append(diffs.get("oldValue"))
+                        .append("\n");
+                default -> {
+                    result.append("  - ")
+                            .append(diffs.get("key"))
+                            .append(": ")
+                            .append(diffs.get("oldValue"))
+                            .append("\n");
+                    result.append("  + ")
+                            .append(diffs.get("key"))
+                            .append(": ")
+                            .append(diffs.get("newValue"))
+                            .append("\n");
+                }
             }
-            if (sortAllDate.get(key).size() < 2 && dateOne.containsKey(key) && !dateTwo.containsKey(key)) {
-                stringBuild.append("  - " + key + ": " + value.get(0).toString() + "\n");
-            }
-            if (sortAllDate.get(key).size() < 2 && dateOne.containsKey(key) && dateTwo.containsKey(key)) {
-                stringBuild.append("    " + key + ": " + value.get(0).toString() + "\n");
-            }
-            if (sortAllDate.get(key).size() < 2 && !dateOne.containsKey(key) && dateTwo.containsKey(key)) {
-                stringBuild.append("  + " + key + ": " + value.get(0).toString() + "\n");
-            }
-        });
-        stringBuild.append("}");
-        return stringBuild.toString();
+        }
+        result.append("}");
+        return result.toString();
     }
+
 }

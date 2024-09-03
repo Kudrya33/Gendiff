@@ -1,54 +1,50 @@
 package hexlet.code.formatters;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class FormatPlain {
-    public static String plain(Map<String, List<Object>> allDate, Map<String,
-            Object> dateOne, Map<String, Object> dateTwo) {
+    public static String plain(List<Map<String, Object>> allDate) {
+        StringBuilder result = new StringBuilder();
 
-        Map<String, List<Object>> sortAllDate = new TreeMap<>(allDate);
-
-        var stringBuild = new StringBuilder();
-
-        sortAllDate.forEach((key, value) -> {
-            if (sortAllDate.get(key).size() > 1) {
-                if (value.get(0) instanceof String && !value.get(0).equals("null")) {
-                    value.set(0, "'" + value.get(0) + "'");
-                }
-                if (value.get(1) instanceof String && !value.get(1).equals("null")) {
-                    value.set(1, "'" + value.get(1) + "'");
-                }
-                if (value.get(0) instanceof List<?> || value.get(0) instanceof Map) {
-                    value.set(0, "[complex value]");
-                }
-                if (value.get(1) instanceof  List<?> || value.get(1) instanceof Map) {
-                    value.set(1, "[complex value]");
-                }
-                stringBuild.append("Property " + "'" + key + "' " + "was updated. From "
-                        + value.get(0).toString() + " to " + value.get(1).toString() + "\n");
+        for (Map<String, Object> diffs : allDate) {
+            switch (diffs.get("status").toString()) {
+                case "removed" -> result.append("Property ")
+                        .append("'")
+                        .append(diffs.get("key"))
+                        .append("'")
+                        .append(" was removed")
+                        .append("\n");
+                case "added" -> result.append("Property ")
+                        .append(complexValue(diffs.get("key")))
+                        .append(" was added with value: ")
+                        .append(complexValue(diffs.get("newValue")))
+                        .append("\n");
+                case "updated" -> result.append("Property ")
+                        .append(complexValue(diffs.get("key")))
+                        .append(" was updated. From ")
+                        .append(complexValue(diffs.get("oldValue")))
+                        .append(" to ")
+                        .append(complexValue(diffs.get("newValue")))
+                        .append("\n");
+                default -> result.append("");
             }
-            if (sortAllDate.get(key).size() < 2 && dateOne.containsKey(key) && !dateTwo.containsKey(key)) {
-                if (value.get(0) instanceof String && !value.get(0).equals("null")) {
-                    value.set(0, "'" + value.get(0) + "'");
-                }
-                if (value.get(0) instanceof List<?> || value.get(0) instanceof Map) {
-                    value.set(0, "[complex value]");
-                }
-                stringBuild.append("Property " + "'" + key + "' " + "was removed\n");
-            }
-            if (sortAllDate.get(key).size() < 2 && !dateOne.containsKey(key) && dateTwo.containsKey(key)) {
-                if (value.get(0) instanceof String && !value.get(0).equals("null")) {
-                    value.set(0, "'" + value.get(0) + "'");
-                }
-                if (value.get(0) instanceof List<?> || value.get(0) instanceof Map) {
-                    value.set(0, "[complex value]");
-                }
-                stringBuild.append("Property " + "'" + key + "' " + "was added with value: "
-                        + value.get(0).toString() + "\n");
-            }
-        });
-        return stringBuild.toString().trim();
+        }
+        return result.toString().trim();
     }
+
+    public static String complexValue(Object data) {
+        if (data instanceof Object[] || data instanceof Collections || data instanceof Map
+                || data instanceof ArrayList<?>) {
+            return "[complex value]";
+        } else if (data instanceof String) {
+            return "'" + data + "'";
+        } else if (data == null) {
+            return null;
+        }
+        return data.toString();
+    }
+
 }

@@ -33,4 +33,5 @@ public class Parser {
         parserMaps.add(mapFromLastFile);
         return parserMaps;
     }
+
 }
