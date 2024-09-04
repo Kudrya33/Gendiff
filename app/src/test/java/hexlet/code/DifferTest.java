@@ -62,7 +62,7 @@ public class DifferTest {
         assertEquals(expected, actual);
     }
 
-    public static String readExpectedFile(String pathFile) throws Exception{
+    public static String readExpectedFile(String pathFile) throws Exception {
         Path path = Paths.get(pathFile).toAbsolutePath().normalize();
         return Files.readString(path).trim();
     }

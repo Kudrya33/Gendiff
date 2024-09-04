@@ -7,7 +7,7 @@ public class FormatStylish {
     public static String stylish(List<Map<String, Object>> allDate) {
         StringBuilder result = new StringBuilder("{\n");
 
-        for(Map<String, Object> diffs: allDate) {
+        for (Map<String, Object> diffs: allDate) {
             switch (diffs.get("status").toString()) {
                 case "removed" -> result.append("  - ")
                         .append(diffs.get("key"))
