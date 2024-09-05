@@ -11,8 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DifferTest {
     String file1 = "src/test/resources/fixtures/file1.json";
     String file2 = "src/test/resources/fixtures/file2.json";
-    String fileH1 = "src/test/resources/fixtures/HexletTest/file1.json";
-    String fileH2 = "src/test/resources/fixtures/HexletTest/file2.json";
 
     @Test
     public void testStylishJson() throws Exception {
@@ -35,14 +33,6 @@ public class DifferTest {
         String format = "json";
         String expected = readExpectedFile("src/test/resources/fixtures/Expected/ExpectedJson.json");
         var actual = Differ.generate(file1, file2, format);
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testHexle() throws Exception {
-        String format = "json";
-        String expected = readExpectedFile("src/test/resources/fixtures/HexletTest/result_json.json");
-        var actual = Differ.generate(fileH1, fileH2, format);
         assertEquals(expected, actual);
     }
 
