@@ -12,6 +12,9 @@ public class Differ {
         Path firstFile = Paths.get(filepath1).toAbsolutePath().normalize();
         Path lastFile = Paths.get(filepath2).toAbsolutePath().normalize();
 
+        String fileType1 = getType(filepath1);
+        String fileType2 = getType(filepath2);
+
         if (!Files.exists(firstFile)) {
             throw new Exception("File '" + filepath1 + "' does not exist");
         }
@@ -19,7 +22,7 @@ public class Differ {
             throw new Exception("File '" + filepath2 + "' does not exist");
         }
 
-        var parserlist = Parser.pars(firstFile, lastFile);
+        var parserlist = Parser.pars(firstFile, lastFile, fileType1, fileType2);
         Map<String, Object> dateOne = parserlist.get(0);
         Map<String, Object> dateTwo = parserlist.get(1);
         List<Map<String, Object>> allDate = AllDiffer.dif(dateOne, dateTwo);
@@ -31,4 +34,7 @@ public class Differ {
         return generate(filepath1, filepath2, "stylish");
     }
 
+    public static String getType(String filePath) {
+        return filePath.substring(filePath.indexOf(".") + 1);
+    }
 }
