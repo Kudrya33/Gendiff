@@ -9,8 +9,8 @@ import java.nio.file.Paths;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DifferTest {
-    String file1 = "src/test/resources/fixtures/file1.json";
-    String file2 = "src/test/resources/fixtures/file2.json";
+    private String file1 = "src/test/resources/fixtures/file1.json";
+    private String file2 = "src/test/resources/fixtures/file2.json";
 
     @Test
     public void testStylishJson() throws Exception {
