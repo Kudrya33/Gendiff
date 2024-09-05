@@ -19,21 +19,21 @@ public class AllDiffer {
             Map<String, Object> map = new LinkedHashMap<>();
             if (map1.containsKey(key) && !map2.containsKey(key)) {
                 map.put("key", key);
-                map.put("oldValue", map1.get(key));
-                map.put("status", "removed");
+                map.put("type", "deleted");
+                map.put("value", map1.get(key));
             } else if (!map1.containsKey(key) && map2.containsKey(key)) {
                 map.put("key", key);
-                map.put("newValue", map2.get(key));
-                map.put("status", "added");
+                map.put("type", "added");
+                map.put("value", map2.get(key));
             } else if (!Objects.equals(map1.get(key), map2.get(key))) {
                 map.put("key", key);
-                map.put("oldValue", map1.get(key));
-                map.put("newValue", map2.get(key));
-                map.put("status", "updated");
+                map.put("type", "changed");
+                map.put("value1", map1.get(key));
+                map.put("value2", map2.get(key));
             } else {
                 map.put("key", key);
-                map.put("oldValue", map1.get(key));
-                map.put("status", "unchanged");
+                map.put("type", "unchanged");
+                map.put("value", map1.get(key));
             }
             result.add(map);
         }

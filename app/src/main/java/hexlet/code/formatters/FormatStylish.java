@@ -8,32 +8,32 @@ public class FormatStylish {
         StringBuilder result = new StringBuilder("{\n");
 
         for (Map<String, Object> diffs: allDate) {
-            switch (diffs.get("status").toString()) {
-                case "removed" -> result.append("  - ")
+            switch (diffs.get("type").toString()) {
+                case "deleted" -> result.append("  - ")
                         .append(diffs.get("key"))
                         .append(": ")
-                        .append(diffs.get("oldValue"))
+                        .append(diffs.get("value"))
                         .append("\n");
                 case "added" -> result.append("  + ")
                         .append(diffs.get("key"))
                         .append(": ")
-                        .append(diffs.get("newValue"))
+                        .append(diffs.get("value"))
                         .append("\n");
                 case "unchanged" -> result.append("    ")
                         .append(diffs.get("key"))
                         .append(": ")
-                        .append(diffs.get("oldValue"))
+                        .append(diffs.get("value"))
                         .append("\n");
                 default -> {
                     result.append("  - ")
                             .append(diffs.get("key"))
                             .append(": ")
-                            .append(diffs.get("oldValue"))
+                            .append(diffs.get("value1"))
                             .append("\n");
                     result.append("  + ")
                             .append(diffs.get("key"))
                             .append(": ")
-                            .append(diffs.get("newValue"))
+                            .append(diffs.get("value2"))
                             .append("\n");
                 }
             }

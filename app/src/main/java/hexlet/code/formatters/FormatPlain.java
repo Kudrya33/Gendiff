@@ -10,8 +10,8 @@ public class FormatPlain {
         StringBuilder result = new StringBuilder();
 
         for (Map<String, Object> diffs : allDate) {
-            switch (diffs.get("status").toString()) {
-                case "removed" -> result.append("Property ")
+            switch (diffs.get("type").toString()) {
+                case "deleted" -> result.append("Property ")
                         .append("'")
                         .append(diffs.get("key"))
                         .append("'")
@@ -20,14 +20,14 @@ public class FormatPlain {
                 case "added" -> result.append("Property ")
                         .append(complexValue(diffs.get("key")))
                         .append(" was added with value: ")
-                        .append(complexValue(diffs.get("newValue")))
+                        .append(complexValue(diffs.get("value")))
                         .append("\n");
-                case "updated" -> result.append("Property ")
+                case "changed" -> result.append("Property ")
                         .append(complexValue(diffs.get("key")))
                         .append(" was updated. From ")
-                        .append(complexValue(diffs.get("oldValue")))
+                        .append(complexValue(diffs.get("value1")))
                         .append(" to ")
-                        .append(complexValue(diffs.get("newValue")))
+                        .append(complexValue(diffs.get("value2")))
                         .append("\n");
                 default -> result.append("");
             }
