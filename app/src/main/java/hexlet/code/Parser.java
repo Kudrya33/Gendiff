@@ -6,13 +6,12 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class Parser {
-    public static List<Map<String, Object>> pars(Path firstFile, Path lastFile,
+    public static List<Map<String, Object>> pars(File firstFile, File lastFile,
                                                  String type1, String type2) throws IOException {
         Map<String, Object> mapFromFirstFile = Map.of();
         Map<String, Object> mapFromLastFile = Map.of();
@@ -35,17 +34,15 @@ public class Parser {
         parserMaps.add(mapFromLastFile);
         return parserMaps;
     }
-    public static Map<String, Object> jsonFormat(Path path) throws IOException {
+    public static Map<String, Object> jsonFormat(File content) throws IOException {
         ObjectMapper mapperJson = new ObjectMapper();
-        File content = new File(String.valueOf(path));
         Map<String, Object> map = mapperJson.readValue(content, Map.class);
         return map;
     }
-    public static Map<String, Object> yamlFormat(Path path) throws IOException {
+    public static Map<String, Object> yamlFormat(File content) throws IOException {
         ObjectMapper mapperYaml = YAMLMapper.builder()
                 .disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER)
                 .build();
-        File content = new File(String.valueOf(path));
         Map<String, Object> map = mapperYaml.readValue(content, Map.class);
         return map;
     }

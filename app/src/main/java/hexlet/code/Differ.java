@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,6 +16,9 @@ public class Differ {
         String fileType1 = getType(filepath1);
         String fileType2 = getType(filepath2);
 
+        File contentFirstFile = new File(String.valueOf(firstFile));
+        File contentLastFile = new File(String.valueOf(lastFile));
+
         if (!Files.exists(firstFile)) {
             throw new Exception("File '" + filepath1 + "' does not exist");
         }
@@ -22,7 +26,7 @@ public class Differ {
             throw new Exception("File '" + filepath2 + "' does not exist");
         }
 
-        var parserlist = Parser.pars(firstFile, lastFile, fileType1, fileType2);
+        var parserlist = Parser.pars(contentFirstFile, contentLastFile, fileType1, fileType2);
         Map<String, Object> dateOne = parserlist.get(0);
         Map<String, Object> dateTwo = parserlist.get(1);
         List<Map<String, Object>> allDate = AllDiffer.dif(dateOne, dateTwo);

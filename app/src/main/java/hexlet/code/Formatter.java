@@ -14,7 +14,7 @@ public class Formatter {
             case "stylish" -> FormatStylish.stylish(allDate);
             case "plain" -> FormatPlain.plain(allDate);
             case "json" -> FormatJson.json(allDate);
-            default -> FormatStylish.stylish(allDate);
+            default -> throw new Error("Unknown format!");
         };
     }
 
