@@ -9,14 +9,6 @@ import java.util.Map;
 public class FormatJson {
     public static String json(List<Map<String, Object>> allDate) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(allDate)
-                .replace("}, {", "  },\n  {")
-                .replace("[ {", "[\n  {")
-                .replace("} ]", "  }\n]")
-                .replace(" :", ":")
-                .replace("  \"", "    \"")
-                .replace("[ ", "[")
-                .replace(" ]", "]")
-                .replace("  }\n" + "  },", "    }\n" + "  },");
+        return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(allDate);
     }
 }
