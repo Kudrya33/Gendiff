@@ -35,7 +35,7 @@ public class FormatPlain {
         return result.toString().trim();
     }
 
-    public static String complexValue(Object data) {
+    private static String complexValue(Object data) {
         if (data instanceof Object[] || data instanceof Collections || data instanceof Map
                 || data instanceof ArrayList<?>) {
             return "[complex value]";
